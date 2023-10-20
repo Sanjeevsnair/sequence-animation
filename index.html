@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<link href="animation.css" rel="stylesheet">
+<link href="animation.js" rel="stylesheet">
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sequencing animations</title>
+    <script type="text/javascript" src="animation.js" defer></script>
+    <link href="animation.css"rel="stylesheet">
+  </head>
+  <style>body {
+  background: #605cd6;
+  display: flex;
+  justify-content: center;
+  }
+
+#alice-container {
+  width: 90vh;
+  display: grid;
+  place-items: center;
+  grid-template-areas:
+    "a1 . ."
+    ". a2 ."
+    ". . a3";
+}
+
+#alice1 {
+  grid-area: a1;
+}
+
+#alice2 {
+  grid-area: a2;
+}
+
+#alice3 {
+  grid-area: a3;
+}</style>
+  <script>const aliceTumbling = [
+    { transform: 'rotate(0) scale(1)' },
+    { transform: 'rotate(360deg) scale(0)' }
+];
+
+const aliceTiming = {
+    duration: 2000,
+    iterations: 1,
+    fill: 'forwards'
+}
+
+const alice1 = document.querySelector("#alice1");
+const alice2 = document.querySelector("#alice2");
+const alice3 = document.querySelector("#alice3");
+
+alice1.animate(aliceTumbling, aliceTiming).finished
+    .then(() => alice2.animate(aliceTumbling, aliceTiming).finished)
+    .then(() => alice3.animate(aliceTumbling, aliceTiming).finished)
+    .catch(error => console.error(`Error animating Alices: ${error}`));</script>
+
+  <body>
+
+    <div id="alice-container">
+      <img id="alice1"  src="alice.png" role="img" alt="silhouette of crouching long haired character in dress and short boots">
+      <img id="alice2"  src="alice.png" role="img" alt="silhouette of crouching long haired character in dress and short boots">
+      <img id="alice3"  src="alice.png" role="img" alt="silhouette of crouching long haired character in dress and short boots">
+    </div>
+
+  </body>
+
+</html>
